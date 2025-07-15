@@ -1,16 +1,17 @@
-# Dockerfile-Server
-FROM node
+# Use the official Node.js image
+FROM node:24-alpine
 
-ENV MONGO_DB_USERNAME=ostad \
-    MONGO_DB_PASSWORD=ostad 
-
+# Set working directory inside the container
 WORKDIR /ostad-server
 
+# Copy all backend source code from OstadServer directory
 COPY OstadServer/ .
 
-
+# Install backend dependencies
 RUN npm install
 
+# Expose port 5050
 EXPOSE 5050
 
+# Command to run the server
 CMD ["node", "server.js"]
