@@ -44,6 +44,13 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+              value: {{ .Values.deployment.rootUser }}
+            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+              value: {{ .Values.deployment.rootUser }}
+            - name: ME_CONFIG_MONGODB_SERVER
+              value: {{ .Values.deployment.mongoServerName }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}

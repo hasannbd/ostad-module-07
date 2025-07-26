@@ -44,6 +44,13 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: {{ .Values.deployment.rootUser }}
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: {{ .Values.deployment.rootPassword }}
+            - name: MONGO_INITDB_DATABASE
+              value: {{ .Values.deployment.databaseName }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
